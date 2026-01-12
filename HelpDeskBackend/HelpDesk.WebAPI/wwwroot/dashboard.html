@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpDesk - Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="header">
+        <h2>🏠 Dashboard</h2>
+        <div class="user-menu">
+            <span id="userName">Loading...</span>
+            <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div class="container" style="display: block; max-width: 1200px;">
+        <div class="stats-grid">
+            <a href="/my-requests.html" style="text-decoration: none; color: inherit;">
+                <div class="stat-card" style="cursor: pointer; transition: transform 0.2s;"
+                    onmouseover="this.style.transform='translateY(-4px)'"
+                    onmouseout="this.style.transform='translateY(0)'">
+                    <h3>Total Requests</h3>
+                    <div class="value" id="totalRequests">--</div>
+                </div>
+            </a>
+            <a href="/my-requests.html?status=InProgress" style="text-decoration: none; color: inherit;">
+                <div class="stat-card" style="cursor: pointer; transition: transform 0.2s;"
+                    onmouseover="this.style.transform='translateY(-4px)'"
+                    onmouseout="this.style.transform='translateY(0)'">
+                    <h3>Active Requests</h3>
+                    <div class="value" id="activeRequests">--</div>
+                </div>
+            </a>
+            <a href="/my-requests.html?status=Completed" style="text-decoration: none; color: inherit;">
+                <div class="stat-card" style="cursor: pointer; transition: transform 0.2s;"
+                    onmouseover="this.style.transform='translateY(-4px)'"
+                    onmouseout="this.style.transform='translateY(0)'">
+                    <h3>Completed</h3>
+                    <div class="value" id="completedRequests">--</div>
+                </div>
+            </a>
+            <div class="stat-card">
+                <h3>SLA Compliance</h3>
+                <div class="value" id="slaCompliance">--%</div>
+            </div>
+        </div>
+
+        <div class="welcome-section"
+            style="background: var(--card-bg); padding: 48px; border-radius: 24px; text-align: center; margin: 32px 0;">
+            <h1 style="font-size: 48px; margin-bottom: 16px;">🎉 Welcome to HelpDesk!</h1>
+            <p style="font-size: 18px; color: var(--text-light); margin-bottom: 32px;">Your enterprise request
+                management system is ready</p>
+
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; max-width: 800px; margin: 0 auto;">
+                <a href="/swagger" class="feature-link"
+                    style="display: block; padding: 24px; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; text-decoration: none; border-radius: 16px; transition: transform 0.3s;">
+                    <div style="font-size: 36px; margin-bottom: 8px;">📚</div>
+                    <div style="font-weight: 600;">API Documentation</div>
+                    <div style="font-size: 14px; opacity: 0.9;">Swagger UI</div>
+                </a>
+
+                <a href="/submit-request.html" class="feature-link"
+                    style="display: block; padding: 24px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; text-decoration: none; border-radius: 16px; transition: transform 0.3s;">
+                    <div style="font-size: 36px; margin-bottom: 8px;">📋</div>
+                    <div style="font-weight: 600;">Submit Request</div>
+                    <div style="font-size: 14px; opacity: 0.9;">Create new ticket</div>
+                </a>
+
+                <a href="/analytics.html" class="feature-link"
+                    style="display: block; padding: 24px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; text-decoration: none; border-radius: 16px; transition: transform 0.3s;">
+                    <div style="font-size: 36px; margin-bottom: 8px;">📊</div>
+                    <div style="font-weight: 600;">Analytics</div>
+                    <div style="font-size: 14px; opacity: 0.9;">View reports</div>
+                </a>
+            </div>
+
+            <div style="margin-top: 48px; padding: 24px; background: #fef3c7; border-radius: 16px;">
+                <h3 style="margin-bottom: 16px;">✨ Backend Features</h3>
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; text-align: left;">
+                    <div>✅ 54+ API Endpoints</div>
+                    <div>✅ Workflow Engine</div>
+                    <div>✅ SLA Tracking</div>
+                    <div>✅ Auto-Escalation</div>
+                    <div>✅ Notifications</div>
+                    <div>✅ Analytics</div>
+                    <div>✅ HR Integration</div>
+                    <div>✅ Background Jobs</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+
+</html>

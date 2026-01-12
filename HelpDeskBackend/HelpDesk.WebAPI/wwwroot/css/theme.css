@@ -1,0 +1,117 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap');
+
+:root {
+  /* Clean Professional Blue Palette */
+  --blue-900: #1E3A8A;
+  --blue-700: #1D4ED8;
+  --blue-600: #2563EB;
+  --blue-500: #3B82F6;
+  --blue-400: #60A5FA;
+  --blue-300: #93C5FD;
+  --blue-200: #BFDBFE;
+  --blue-100: #DBEAFE;
+  --blue-50: #EFF6FF;
+
+  /* Neutral Grays */
+  --gray-900: #111827;
+  --gray-800: #1F2937;
+  --gray-700: #374151;
+  --gray-600: #4B5563;
+  --gray-500: #6B7280;
+  --gray-400: #9CA3AF;
+  --gray-300: #D1D5DB;
+  --gray-200: #E5E7EB;
+  --gray-100: #F3F4F6;
+  --gray-50: #F9FAFB;
+
+  /* Gold Accent */
+  --gold-500: #F59E0B;
+  --gold-400: #FBBF24;
+  --gold-300: #FCD34D;
+  --gold-200: #FDE68A;
+  --gold-100: #FEF3C7;
+
+  /* Red Accent */
+  --red-600: #E30613;
+  --red-500: #EF4444;
+
+  /* Backgrounds */
+  --bg-color: #F9FAFB;
+  --card-bg: #FFFFFF;
+
+  /* Gradients */
+  --gradient-blue: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+  --gradient-gold: linear-gradient(135deg, #FBBF24 0%, #FCD34D 100%);
+  --gradient-hero: linear-gradient(to bottom right, #EFF6FF, #DBEAFE, #BFDBFE);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Font */
+  --font-main: 'Cairo', 'Tajawal', sans-serif;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--gray-900);
+  margin: 0;
+  padding: 0;
+  direction: rtl; /* Arabic default */
+}
+
+/* Utilities */
+.text-center { text-align: center; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+.flex { display: flex; }
+.justify-center { justify-content: center; }
+.items-center { align-items: center; }
+.gap-2 { gap: 0.5rem; }
+.gap-4 { gap: 1rem; }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  transition: all 0.3ms;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary {
+  background: var(--gradient-blue);
+  color: white !important;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -5px rgba(59, 130, 246, 0.4);
+}
+
+.btn-outline {
+  background: white;
+  color: var(--blue-600) !important;
+  border: 1px solid var(--blue-100);
+}
+
+.btn-outline:hover {
+  background: var(--blue-50);
+}
+
+/* Icons */
+.icon {
+    width: 1.25em;
+    height: 1.25em;
+}

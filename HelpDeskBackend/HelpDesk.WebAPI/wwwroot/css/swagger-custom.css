@@ -1,0 +1,135 @@
+@import url('theme.css');
+
+/* Base Override */
+body {
+    background-color: var(--bg-color);
+    font-family: var(--font-main) !important;
+}
+
+/* 1. Header / Topbar */
+.swagger-ui .topbar {
+    background: var(--gradient-blue);
+    box-shadow: var(--shadow-md);
+    padding: 15px 0;
+}
+
+.swagger-ui .topbar a {
+    font-weight: 700;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.swagger-ui .topbar .download-url-wrapper .download-url-button {
+    background: var(--gold-500) !important; /* Gold Button */
+    color: white !important;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+}
+
+/* 2. Info Container (Title & Desc) */
+.swagger-ui .info {
+    margin: 20px 0;
+}
+
+.swagger-ui .info .title {
+    color: var(--blue-900) !important;
+    font-family: var(--font-main) !important;
+}
+
+.swagger-ui .info .title small {
+    background: var(--gold-100);
+    color: var(--gold-500);
+    border-radius: 99px;
+    padding: 2px 8px;
+    font-size: 0.7em;
+    vertical-align: middle;
+}
+
+/* 3. Operations / Accordions */
+.swagger-ui .opblock {
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-200);
+    margin-bottom: 15px;
+}
+
+/* HTTP Method Badges */
+.swagger-ui .opblock .opblock-summary-method {
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+/* GET */
+.swagger-ui .opblock.opblock-get {
+    background: rgba(59, 130, 246, 0.05); /* Blue tint */
+    border-color: var(--blue-200);
+}
+.swagger-ui .opblock.opblock-get .opblock-summary-method {
+    background: var(--blue-600);
+}
+
+/* POST */
+.swagger-ui .opblock.opblock-post {
+    background: rgba(16, 185, 129, 0.05); /* Green tint */
+    border-color: #A7F3D0;
+}
+.swagger-ui .opblock.opblock-post .opblock-summary-method {
+    background: #10B981;
+}
+
+/* PUT */
+.swagger-ui .opblock.opblock-put {
+    background: rgba(245, 158, 11, 0.05); /* Orange tint */
+    border-color: #FDE68A;
+}
+.swagger-ui .opblock.opblock-put .opblock-summary-method {
+    background: var(--gold-500);
+}
+
+/* DELETE */
+.swagger-ui .opblock.opblock-delete {
+    background: rgba(239, 68, 68, 0.05); /* Red tint */
+    border-color: #FECACA;
+}
+.swagger-ui .opblock.opblock-delete .opblock-summary-method {
+    background: var(--red-500);
+}
+
+/* 4. Buttons */
+.swagger-ui .btn {
+    border-radius: 6px;
+    font-weight: 600;
+    box-shadow: none;
+    text-transform: capitalize;
+}
+
+.swagger-ui .btn.execute {
+    background: var(--gradient-blue) !important;
+    border: none;
+    width: 100%;
+    color: white !important;
+}
+
+.swagger-ui .btn.authorize {
+    color: var(--blue-600);
+    border-color: var(--blue-600);
+    background: white;
+}
+
+.swagger-ui .btn.authorize svg {
+    fill: var(--blue-600);
+}
+
+/* 5. Models */
+.swagger-ui section.models {
+    border-radius: 8px;
+    border: 1px solid var(--gray-200);
+    margin-top: 30px;
+}
+.swagger-ui section.models h4 {
+    color: var(--gray-700);
+}
+.swagger-ui section.models .model-container {
+    background: white;
+}

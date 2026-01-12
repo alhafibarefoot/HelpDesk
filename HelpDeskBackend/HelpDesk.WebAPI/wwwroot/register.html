@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpDesk - Create Account</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="login-card">
+            <div class="logo">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="30" cy="30" r="28" fill="url(#gradient)" stroke="#fff" stroke-width="2" />
+                    <path d="M30 15v30M15 30h30" stroke="#fff" stroke-width="4" stroke-linecap="round" />
+                    <defs>
+                        <linearGradient id="gradient" x1="0" y1="0" x2="60" y2="60">
+                            <stop offset="0%" stop-color="#6366f1" />
+                            <stop offset="100%" stop-color="#8b5cf6" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>Create Account</h1>
+                <p class="subtitle">Join the HelpDesk System</p>
+            </div>
+
+            <form id="registerForm">
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+                <div id="successMessage" class="success-message" style="display: none;"></div>
+
+                <div class="input-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="John Doe" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="you@company.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="department">Department</label>
+                    <input type="text" id="department" name="department" placeholder="IT, HR, Finance, etc." required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Minimum 6 characters" required
+                        minlength="6">
+                </div>
+
+                <div class="input-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password"
+                        required>
+                </div>
+
+                <button type="submit" class="btn-primary" id="registerBtn">
+                    <span class="btn-text">Create Account</span>
+                    <span class="spinner" style="display: none;"></span>
+                </button>
+
+                <div class="register-link">
+                    Already have an account? <a href="/index.html">Sign In</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="features">
+            <div class="feature-item">
+                <div class="feature-icon">🔒</div>
+                <h3>Secure Access</h3>
+                <p>JWT token-based authentication</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">👥</div>
+                <h3>Team Collaboration</h3>
+                <p>Work together on requests</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">⚙️</div>
+                <h3>Role-Based Access</h3>
+                <p>Different permissions for each role</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/auth.js"></script>
+</body>
+
+</html>

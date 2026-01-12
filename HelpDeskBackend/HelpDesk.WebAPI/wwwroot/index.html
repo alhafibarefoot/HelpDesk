@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpDesk System - Login</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-card">
+            <div class="logo">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="30" cy="30" r="28" fill="url(#gradient)" stroke="#fff" stroke-width="2"/>
+                    <path d="M30 15v30M15 30h30" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0" y1="0" x2="60" y2="60">
+                            <stop offset="0%" stop-color="#6366f1"/>
+                            <stop offset="100%" stop-color="#8b5cf6"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>HelpDesk System</h1>
+                <p class="subtitle">Enterprise Request Management</p>
+            </div>
+
+            <form id="loginForm">
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="you@company.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit" class="btn-primary" id="loginBtn">
+                    <span class="btn-text">Sign In</span>
+                    <span class="spinner" style="display: none;"></span>
+                </button>
+
+                <div class="register-link">
+                    Don't have an account? <a href="/register.html">Create Account</a>
+                </div>
+
+                <div class="demo-credentials">
+                    <strong>Demo:</strong> admin@helpdesk.com / admin123
+                </div>
+            </form>
+        </div>
+
+        <div class="features">
+            <div class="feature-item">
+                <div class="feature-icon">📋</div>
+                <h3>Request Management</h3>
+                <p>Submit and track service requests</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <h3>Workflow Automation</h3>
+                <p>Automated approval workflows</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">📊</div>
+                <h3>Analytics Dashboard</h3>
+                <p>Real-time insights and reports</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/auth.js"></script>
+</body>
+</html>

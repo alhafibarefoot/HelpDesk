@@ -1,0 +1,102 @@
+@page
+@using Microsoft.EntityFrameworkCore
+@using HelpDesk.Infrastructure.Persistence
+@using HelpDesk.Domain.Entities
+@inject HelpDeskDbContext DbContext
+
+@{
+    ViewData["Title"] = "الرئيسية";
+    var services = await DbContext.Services.Where(s => s.IsActive).ToListAsync();
+}
+
+<div class="hero-section" style="min-height: 400px; padding-bottom: 80px;">
+    <!-- Background Elements -->
+    <div class="bg-pattern"></div>
+    <div class="orb orb-blue"></div>
+    <div class="orb orb-gold"></div>
+
+    <div class="content-box" style="padding-top: 4rem;">
+        <!-- Badge -->
+        <div class="premium-badge">
+            <i class="fa-solid fa-crown text-gold-500"></i>
+            <span>المؤسسة الملكية للأعمال الإنسانية</span>
+        </div>
+
+        <!-- Title -->
+        <h1>
+            <span>منصة</span>
+            <span class="highlight">خدمات بلس</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="subtitle">
+            منصة متكاملة لخدمات الموظفين
+            <br>
+            <span style="color: var(--blue-500); font-weight: 600;">سهولة • سرعة • كفاءة</span>
+        </p>
+
+        <!-- Search Bar (Visual Only) -->
+        <div style="max-width: 600px; margin: 0 auto; position: relative;">
+            <input type="text" placeholder="ابحث عن خدمة..." style="width: 100%; padding: 1rem 3rem 1rem 1rem; border-radius: 99px; border: 1px solid var(--gray-300); font-size: 1.1rem; box-shadow: var(--shadow-md);">
+            <i class="fa-solid fa-search" style="position: absolute; right: 1.5rem; top: 50%; transform: translateY(-50%); color: var(--gray-400);"></i>
+        </div>
+    </div>
+
+    <!-- Wave -->
+    <div class="royal-wave">
+        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; display: block;">
+            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#F9FAFB" />
+        </svg>
+    </div>
+</div>
+
+<div class="container" style="padding-bottom: 4rem;">
+
+    <div class="text-center mb-12">
+        <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">
+            الخدمات المتاحة
+        </h2>
+        <p style="color: var(--gray-600); font-size: 1.2rem;">
+            اختر الخدمة المناسبة لك واستمتع بتجربة استثنائية
+        </p>
+    </div>
+
+    @if (services.Any())
+    {
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;">
+            @foreach (var service in services)
+            {
+                <div class="premium-card" style="padding: 1.5rem; text-decoration: none; display: block; color: inherit;">
+                    <div style="width: 50px; height: 50px; background: var(--blue-50); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                        <!-- Dynamic Icon Map -->
+                        @if (service.Icon == "Monitor") { <i class="fa-solid fa-desktop text-blue-600 fa-xl"></i> }
+                        else if (service.Icon == "Code") { <i class="fa-solid fa-code text-blue-600 fa-xl"></i> }
+                        else if (service.Icon == "Key") { <i class="fa-solid fa-key text-blue-600 fa-xl"></i> }
+                        else if (service.Icon == "Users") { <i class="fa-solid fa-users text-blue-600 fa-xl"></i> }
+                        else if (service.Icon == "CreditCard") { <i class="fa-solid fa-credit-card text-blue-600 fa-xl"></i> }
+                        else { <i class="fa-solid fa-briefcase text-blue-600 fa-xl"></i> }
+                    </div>
+
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">@service.Name</h3>
+                    <p style="color: var(--gray-500); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem; min-height: 40px;">
+                        @service.Description
+                    </p>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--gray-100); padding-top: 1rem;">
+                        <span style="font-size: 0.8rem; color: var(--gray-400);">@service.OwningDepartment</span>
+                        <a href="/swagger" class="btn btn-primary" style="font-size: 0.9rem; padding: 0.5rem 1rem;">طلب الخدمة</a>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="text-center" style="padding: 4rem; background: white; border-radius: 1rem; box-shadow: var(--shadow-sm);">
+            <i class="fa-solid fa-inbox fa-3x text-gray-300 mb-4"></i>
+            <h3>لا توجد خدمات متاحة حالياً</h3>
+            <p class="text-gray-500">يرجى مراجعة المسؤول لإضافة خدمات جديدة</p>
+        </div>
+    }
+
+</div>

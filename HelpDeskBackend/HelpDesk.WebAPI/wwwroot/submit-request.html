@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Request - HelpDesk</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .request-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .form-header h1 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            color: #6c757d;
+        }
+
+        .form-section {
+            margin-bottom: 32px;
+        }
+
+        .form-section h3 {
+            font-size: 18px;
+            color: #495057;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #495057;
+        }
+
+        .input-group label.required::after {
+            content: " *";
+            color: #dc3545;
+        }
+
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .input-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .file-upload {
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .file-upload:hover {
+            border-color: #667eea;
+            background: #f8f9fa;
+        }
+
+        .file-upload input {
+            display: none;
+        }
+
+        .file-list {
+            margin-top: 16px;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .file-item button {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .priority-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .priority-option {
+            padding: 16px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .priority-option:hover {
+            border-color: #667eea;
+        }
+
+        .priority-option.selected {
+            border-color: #667eea;
+            background: #e7f0ff;
+        }
+
+        .priority-option input {
+            display: none;
+        }
+
+        .submit-actions {
+            display: flex;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .submit-actions button {
+            flex: 1;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-cancel {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        #dynamicFields {
+            display: none;
+        }
+
+        #dynamicFields.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h2>📝 Submit New Request</h2>
+        <div class="user-menu">
+            <a href="/dashboard.html" style="text-decoration: none; color: inherit; margin-right: 16px;">🏠
+                Dashboard</a>
+            <span id="userName">Loading...</span>
+            <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div class="request-container">
+        <div class="form-header">
+            <h1>Create Service Request</h1>
+            <p>Fill out the form below to submit your request</p>
+        </div>
+
+        <form id="requestForm">
+            <div class="form-section">
+                <h3>Request Information</h3>
+
+                <div class="input-group">
+                    <label for="serviceId" class="required">Service Type</label>
+                    <select id="serviceId" required onchange="loadServiceForm()">
+                        <option value="">Select a service...</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="title" class="required">Request Title</label>
+                    <input type="text" id="title" placeholder="Brief description of your request" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="description" class="required">Description</label>
+                    <textarea id="description" placeholder="Provide detailed information about your request"
+                        required></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>Priority Level</label>
+                    <div class="priority-options">
+                        <div class="priority-option" onclick="selectPriority(0)">
+                            <input type="radio" name="priority" value="Low" id="priorityLow">
+                            <div style="font-size: 24px; margin-bottom: 8px;">🟢</div>
+                            <div>Low</div>
+                        </div>
+                        <div class="priority-option selected" onclick="selectPriority(1)">
+                            <input type="radio" name="priority" value="Medium" id="priorityMedium" checked>
+                            <div style="font-size: 24px; margin-bottom: 8px;">🟡</div>
+                            <div>Medium</div>
+                        </div>
+                        <div class="priority-option" onclick="selectPriority(2)">
+                            <input type="radio" name="priority" value="High" id="priorityHigh">
+                            <div style="font-size: 24px; margin-bottom: 8px;">🟠</div>
+                            <div>High</div>
+                        </div>
+                        <div class="priority-option" onclick="selectPriority(3)">
+                            <input type="radio" name="priority" value="Urgent" id="priorityUrgent">
+                            <div style="font-size: 24px; margin-bottom: 8px;">🔴</div>
+                            <div>Urgent</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section" id="dynamicFields">
+                <h3>Additional Information</h3>
+                <div id="customFieldsContainer"></div>
+            </div>
+
+            <div class="form-section">
+                <h3>Attachments</h3>
+                <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                    <input type="file" id="fileInput" multiple onchange="handleFiles(event)">
+                    <div style="font-size: 48px; margin-bottom: 16px;">📎</div>
+                    <div>Click to upload files or drag and drop</div>
+                    <div style="font-size: 12px; color: #6c757d; margin-top: 8px;">
+                        Maximum file size: 10MB
+                    </div>
+                </div>
+                <div class="file-list" id="fileList"></div>
+            </div>
+
+            <div class="submit-actions">
+                <button type="button" class="btn-cancel" onclick="window.location.href='/dashboard.html'">
+                    Cancel
+                </button>
+                <button type="submit" class="btn-submit">
+                    🚀 Submit Request
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/submit-request.js"></script>
+</body>
+
+</html>

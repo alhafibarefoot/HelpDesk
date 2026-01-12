@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - HelpDesk</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        .analytics-container {
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .metric-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #667eea;
+        }
+
+        .metric-card h3 {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .metric-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .metric-change {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .metric-change.positive {
+            color: #28a745;
+        }
+
+        .metric-change.negative {
+            color: #dc3545;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .chart-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-card h3 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .filters {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .filters select {
+            padding: 10px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .workflow-table {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .workflow-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .workflow-table th {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 2px solid #dee2e6;
+            color: #495057;
+            font-weight: 600;
+        }
+
+        .workflow-table td {
+            padding: 12px;
+            border-bottom: 1px solid #f1f3f5;
+        }
+
+        .workflow-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-badge.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-badge.in-progress {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-badge.pending {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h2>📊 Analytics Dashboard</h2>
+        <div class="user-menu">
+            <a href="/dashboard.html" style="text-decoration: none; color: inherit; margin-right: 16px;">🏠
+                Dashboard</a>
+            <span id="userName">Loading...</span>
+            <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div class="analytics-container">
+        <div class="filters">
+            <label>Time Period:</label>
+            <select id="timePeriod" onchange="loadAnalytics()">
+                <option value="7">Last 7 days</option>
+                <option value="30" selected>Last 30 days</option>
+                <option value="90">Last 90 days</option>
+            </select>
+
+            <label>Service:</label>
+            <select id="serviceFilter" onchange="loadAnalytics()">
+                <option value="">All Services</option>
+            </select>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h3>Total Requests</h3>
+                <div class="metric-value" id="totalRequests">-</div>
+                <div class="metric-change positive" id="requestsChange">
+                    <span>↑</span>
+                    <span>0%</span>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <h3>Completed</h3>
+                <div class="metric-value" id="completedRequests">-</div>
+                <div class="metric-change" id="completedRate">
+                    <span>0% completion rate</span>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <h3>Avg. Completion Time</h3>
+                <div class="metric-value" id="avgTime">-</div>
+                <div class="metric-change" id="avgTimeChange">
+                    <span>hours</span>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <h3>SLA Compliance</h3>
+                <div class="metric-value" id="slaCompliance">-</div>
+                <div class="metric-change positive">
+                    <span>✓ On track</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Request Status Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="statusChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h3>Request Trend</h3>
+                <div class="chart-container">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Requests by Service</h3>
+                <div class="chart-container">
+                    <canvas id="servicesChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h3>Priority Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="priorityChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Workflow Performance Table -->
+        <div class="workflow-table">
+            <h3 style="margin-bottom: 20px;">Workflow Performance</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Workflow</th>
+                        <th>Total Requests</th>
+                        <th>Completed</th>
+                        <th>Avg. Duration</th>
+                        <th>Completion Rate</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="workflowTableBody">
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 40px;">Loading...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/analytics.js"></script>
+</body>
+
+</html>
